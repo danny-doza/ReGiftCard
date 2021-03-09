@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "811742408650",
+    "project_id": "regiftcard",
+    "storage_bucket": "regiftcard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811742408650:android:cb2a41f2e59b2986972933",
+        "android_client_info": {
+          "package_name": "com.csci4480.regiftcard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811742408650-nkb8v7sqn04rdlp0r9r703hng25h8cak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACpAWAWBjsZKgjupgUnCs91JbNwUz7HCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811742408650-nkb8v7sqn04rdlp0r9r703hng25h8cak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

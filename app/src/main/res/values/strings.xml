@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">ReGiftCard</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="btn_link_to_register">Not a member? Get registered today!</string>
+    <string name="btn_forgot_password">Forgot your password?</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_link_to_login">Already registered? Login now!</string>
+    <string name="hint_username">Username</string>
+    <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="forgot_password_msg">Please input the email you used to sign up below and follow the password reset instructions sent to your email.</string>
+    <string name="btn_reset_password">RESET PASSWORD</string>
+    <string name="btn_back"><![CDATA[<< BACK]]></string>
+    <string name="title_activity_resetpassword">ResetPasswordActivity</string>
+    <string name="btn_sign_up">REGISTER</string>
+</resources>
