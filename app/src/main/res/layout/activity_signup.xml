@@ -18,7 +18,7 @@
         android:layout_marginTop="96dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/ic_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -126,7 +126,7 @@
         android:background="@null"
         android:text="@string/btn_forgot_password"
         android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
