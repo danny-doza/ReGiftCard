@@ -69,4 +69,74 @@
             android:textColorHint="#ffffff" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/user_preferences"
+        android:layout_width="323dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="28dp"
+        android:text="Enter companies you would accept a trade for"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_company" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView1"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="12dp"
+        android:text="Company 1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_preferences" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView3"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="64dp"
+        android:visibility="gone"
+        android:text="Company 3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_preferences" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView4"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="64dp"
+        android:text="Company 4"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.786"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_preferences" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView2"
+        android:layout_width="179dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:text="Company 2"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintStart_toEndOf="@+id/autoCompleteTextView1"
+        app:layout_constraintTop_toBottomOf="@+id/user_preferences" />
+
+    <Button
+        android:id="@+id/add_company"
+        android:layout_width="59dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:text="+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/user_preferences"
+        app:layout_constraintTop_toBottomOf="@+id/layout_company" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

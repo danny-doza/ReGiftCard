@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.csci4480.regiftcard.data.classes.Card
 import com.csci4480.regiftcard.data.classes.User
 import com.csci4480.regiftcard.databinding.FragmentAddCardBinding
@@ -21,6 +22,7 @@ class AddCardActivity: AppCompatActivity() {
     private var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var mAuthListener: AuthStateListener
+    var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,21 @@ class AddCardActivity: AppCompatActivity() {
 
         //initialize helper methods
         setupFirebaseAuth()
+
+        binding.addCompany.setOnClickListener {
+            Log.d(LOG_TAG, "added a company")
+
+            if(count == 0) {
+                binding.autoCompleteTextView2.isVisible = true
+            }
+            if(count == 1) {
+                binding.autoCompleteTextView3.isVisible = true
+            }
+            if(count == 2) {
+                binding.autoCompleteTextView4.isVisible = true
+            }
+            count++
+        }
 
         binding.buttonUploadCard.setOnClickListener {
             getEventInfo(binding)
