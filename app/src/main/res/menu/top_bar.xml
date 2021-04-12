@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    app:showAsAction="ifRoom|withText"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id = "@+id/log_out"
+        tools:ignore="ExtraText"
+        android:title = "Log Out">
+    </item>
+
+    <item android:id = "@+id/profile_page"
+        tools:ignore="ExtraText"
+        android:title = "Profile Page">
+    </item>
+</menu>
