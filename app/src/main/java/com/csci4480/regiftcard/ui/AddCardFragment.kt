@@ -8,17 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.NonNull
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.csci4480.regiftcard.R
 import com.csci4480.regiftcard.data.classes.Card
-import com.csci4480.regiftcard.data.classes.User
 import com.csci4480.regiftcard.databinding.FragmentAddCardBinding
-import com.csci4480.regiftcard.ui.home.HomeFragment
-import com.csci4480.regiftcard.ui.home.HomeViewModel
-import com.csci4480.regiftcard.ui.notifications.NotificationsFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.database.*
@@ -81,6 +74,15 @@ class AddCardFragment: Fragment() {
         mAuth.removeAuthStateListener(mAuthListener)
     }
 
+    private fun grabCompaniesAccepted(binding: FragmentAddCardBinding): MutableList<String> {
+        val companies_accepted =
+                mutableListOf(if (binding.autoCompleteTextView1.text.toString() != "Company 1") binding.autoCompleteTextView1.text.toString() else "",
+                        if (binding.autoCompleteTextView2.text.toString() != "Company 1") binding.autoCompleteTextView2.text.toString() else "",
+                        if (binding.autoCompleteTextView3.text.toString() != "Company 1") binding.autoCompleteTextView3.text.toString() else "",
+                        if (binding.autoCompleteTextView4.text.toString() != "Company 1") binding.autoCompleteTextView1.text.toString() else "")
+        return companies_accepted
+    }
+
     private fun setupFirebaseAuth() {
         mAuthListener = AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
@@ -110,6 +112,8 @@ class AddCardFragment: Fragment() {
         Log.d(LOG_TAG, "getCardInfo() called")
         val company = binding.inputCompany.text.toString()
         val card_num = binding.inputNumber.text.toString()
+        val companies_accepted = grabCompaniesAccepted(binding)
+        val card_worth = 0
 
         if (TextUtils.isEmpty(company)) {
             Log.d(LOG_TAG, "company input field is empty.")
@@ -122,7 +126,24 @@ class AddCardFragment: Fragment() {
             return
         }
 
-        val card = Card(company, card_num)
+        if (card_worth != -1) {
+            Log.d(LOG_TAG, "card_worth input field is empty.")
+            Toast.makeText(context, "Enter card worth!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        var company_inputted = false
+        companies_accepted.forEach {company_name ->
+            if (company_name != "")
+                company_inputted = true
+        }
+        if (!company_inputted) {
+            Log.d(LOG_TAG, "Please input at least 1 company.")
+            Toast.makeText(context, "Please input at least 1 company your are willing to accept!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val card = Card(company, card_num, card_worth, companies_accepted)
         val card_count_query: Query = mDatabase.child("card_count")
         card_count_query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

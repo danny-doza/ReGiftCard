@@ -50,6 +50,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
     implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'com.firebaseui:firebase-ui-database:4.3.2'
+
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
