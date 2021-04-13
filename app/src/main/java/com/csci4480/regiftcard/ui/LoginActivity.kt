@@ -156,6 +156,7 @@ class LoginActivity : AppCompatActivity() {
         mAuthListener = AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
             if (user != null) {
+                Log.d(LOG_TAG, "User already signed in. We can move to MainActivity")
             } else {
             }
         }

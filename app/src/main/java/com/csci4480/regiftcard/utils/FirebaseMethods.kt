@@ -225,7 +225,7 @@ class FirebaseMethods {
                 firebase_url = uri
                 val user =
                     User(username, userID, email_address, firebase_url.toString())
-                mDatabase!!.child("users").child(userID).setValue(user)
+                mDatabase.child("users").child(userID).setValue(user)
                 Log.d(LOG_TAG, "addNewUser: Successfully added new user to database.")
 
                 //input logic here to update all user adapter_event profile pictures

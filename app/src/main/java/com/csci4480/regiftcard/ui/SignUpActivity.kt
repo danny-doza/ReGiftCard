@@ -26,7 +26,7 @@ class SignUpActivity: AppCompatActivity() {
     // Firebase variables
     var mDatabase: DatabaseReference? = null
 
-    private lateinit var mAuth: FirebaseAuth
+    private val mAuth = FirebaseAuth.getInstance()
     private lateinit var mAuthListener: AuthStateListener
     private lateinit var firebaseMethods: FirebaseMethods
 
@@ -86,50 +86,53 @@ class SignUpActivity: AppCompatActivity() {
     }
 
     private fun setupFirebaseAuth() {
-        mAuth = FirebaseAuth.getInstance()
         mAuthListener = AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
 
             //if user is signed in
             if (user != null) {
-                userID = user.uid
-                mDatabase!!.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
-                        //note on below comment. User should not be able to access registration
-                        //page if already signed in so there SHOULD be no problems. Come back
-                        //to regardless.
+                if (this::username.isInitialized) {
+                    userID = user.uid
+                    mDatabase!!.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
+                            //note on below comment. User should not be able to access registration
+                            //page if already signed in so there SHOULD be no problems. Come back
+                            //to regardless.
 
-                        //CODE DOES NOT CHECK FOR ALREADY SIGNED IN USER BEFORE REGISTRATION.
-                        //IF USER IS ALREADY SIGNED IN AN INCORRECTLY FORMATTED USER WILL BE ADDED
-                        //TO DATABASE CAUSING MANY ERRORS. FIX SOON!!!
+                            //CODE DOES NOT CHECK FOR ALREADY SIGNED IN USER BEFORE REGISTRATION.
+                            //IF USER IS ALREADY SIGNED IN AN INCORRECTLY FORMATTED USER WILL BE ADDED
+                            //TO DATABASE CAUSING MANY ERRORS. FIX SOON!!!
 
-                        //check if username is available
-                        if (firebaseMethods.isUsernameAvailable(username, dataSnapshot)) {
-                            //add new user to database
-                            firebaseMethods.addNewUser(username, userID, email, "")
-                            Toast.makeText(
-                                this@SignUpActivity,
-                                "Signup successful. Sending verification email.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
-                        } else {
-                            //username is taken
-                            mAuth.currentUser!!.delete()
-                            Log.d(
-                                LOG_TAG,
-                                "onDataChange: Username $username is already in use by another user."
-                            )
-                            Toast.makeText(
-                                applicationContext,
-                                "Username is already taken. Please input different username.",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            //check if username is available
+                            if (firebaseMethods.isUsernameAvailable(username, dataSnapshot)) {
+                                //add new user to database
+                                firebaseMethods.addNewUser(username, userID, email, "")
+                                Toast.makeText(
+                                        this@SignUpActivity,
+                                        "Signup successful. Sending verification email.",
+                                        Toast.LENGTH_SHORT
+                                ).show()
+                                startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+                            } else {
+                                //username is taken
+                                mAuth.currentUser!!.delete()
+                                Log.d(
+                                        LOG_TAG,
+                                        "onDataChange: Username $username is already in use by another user."
+                                )
+                                Toast.makeText(
+                                        applicationContext,
+                                        "Username is already taken. Please input different username.",
+                                        Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
-                    }
 
-                    override fun onCancelled(@NonNull databaseError: DatabaseError) {}
-                })
+                        override fun onCancelled(@NonNull databaseError: DatabaseError) {}
+                    })
+                } else {
+                    Log.d(LOG_TAG, "User has not filled in all the boxes yet.")
+                }
             } else {
                 userID = "User not found."
                 Log.d(LOG_TAG, "User is not signed in.")
@@ -173,6 +176,7 @@ class SignUpActivity: AppCompatActivity() {
             binding.progressBar.setVisibility(View.VISIBLE)
 
             //create user
+            setupFirebaseAuth()
             firebaseMethods.registerNewEmail(mAuth, username, email, password, binding.progressBar)
             mAuth.signOut()
         })
