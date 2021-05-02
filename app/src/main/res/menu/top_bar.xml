@@ -7,9 +7,4 @@
         tools:ignore="ExtraText"
         android:title = "Log Out">
     </item>
-
-    <item android:id = "@+id/profile_page"
-        tools:ignore="ExtraText"
-        android:title = "Profile Page">
-    </item>
 </menu>
