@@ -32,19 +32,14 @@ class DashboardFragment : Fragment() {
 //            textView.text = it
 //        })
 
-        card_grabber = GrabCards(binding)
-        view = card_grabber.grabCards(binding.crimeListRecyclerView, requireActivity(), view)
-
         return view
     }
 
     override fun onStart() {
         super.onStart()
-        card_grabber.onStart()
     }
 
     override fun onStop() {
         super.onStop()
-        card_grabber.onStop()
     }
 }

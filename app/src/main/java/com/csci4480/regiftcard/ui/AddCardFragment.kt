@@ -1,5 +1,7 @@
 package com.csci4480.regiftcard.ui
 
+import android.R
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -26,13 +28,18 @@ class AddCardFragment: Fragment() {
     private lateinit var mAuthListener: AuthStateListener
     var count = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(LOG_TAG, "onCreate() called")
         super.onCreate(savedInstanceState)
         //initialize helper methods
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         Log.d(LOG_TAG, "onCreateView() called")
         val binding = FragmentAddCardBinding.inflate(layoutInflater)
         val view = binding.root
@@ -76,10 +83,12 @@ class AddCardFragment: Fragment() {
 
     private fun grabCompaniesAccepted(binding: FragmentAddCardBinding): MutableList<String> {
         val companies_accepted =
-                mutableListOf(if (binding.autoCompleteTextView1.text.toString() != "Company 1") binding.autoCompleteTextView1.text.toString() else "",
-                        if (binding.autoCompleteTextView2.text.toString() != "Company 1") binding.autoCompleteTextView2.text.toString() else "",
-                        if (binding.autoCompleteTextView3.text.toString() != "Company 1") binding.autoCompleteTextView3.text.toString() else "",
-                        if (binding.autoCompleteTextView4.text.toString() != "Company 1") binding.autoCompleteTextView1.text.toString() else "")
+                mutableListOf(
+                    if (binding.autoCompleteTextView1.text.toString() != "Company 1") binding.autoCompleteTextView1.text.toString() else "",
+                    if (binding.autoCompleteTextView2.text.toString() != "Company 1") binding.autoCompleteTextView2.text.toString() else "",
+                    if (binding.autoCompleteTextView3.text.toString() != "Company 1") binding.autoCompleteTextView3.text.toString() else "",
+                    if (binding.autoCompleteTextView4.text.toString() != "Company 1") binding.autoCompleteTextView1.text.toString() else ""
+                )
         return companies_accepted
     }
 
@@ -91,7 +100,8 @@ class AddCardFragment: Fragment() {
             if (user != null) {
                 Log.d(LOG_TAG, "onAuthStateChanged: Signed in as: " + user.uid)
                 val user_id = user.uid
-                mDatabase.child("users").child(user.uid).addValueEventListener(object : ValueEventListener {
+                mDatabase.child("users").child(user.uid).addValueEventListener(object :
+                    ValueEventListener {
                     override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
                         val username = dataSnapshot.child("username").value.toString()
                         Log.d(LOG_TAG, "onDataChange: User username is $username")
@@ -133,13 +143,17 @@ class AddCardFragment: Fragment() {
         }
 
         var company_inputted = false
-        companies_accepted.forEach {company_name ->
+        companies_accepted.forEach { company_name ->
             if (company_name != "")
                 company_inputted = true
         }
         if (!company_inputted) {
             Log.d(LOG_TAG, "Please input at least 1 company.")
-            Toast.makeText(context, "Please input at least 1 company your are willing to accept!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                "Please input at least 1 company your are willing to accept!",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
@@ -151,7 +165,7 @@ class AddCardFragment: Fragment() {
                     Log.d(LOG_TAG, "Attempting to add card to database.")
                     val card_count = dataSnapshot.value.toString()
                     mDatabase.child("cards").child(card_count).setValue(card)
-                    mDatabase.child("card_count").setValue(card_count.toInt()+1)
+                    mDatabase.child("card_count").setValue(card_count.toInt() + 1)
                 }
             }
 

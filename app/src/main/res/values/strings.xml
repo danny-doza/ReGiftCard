@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ReGiftCard</string>
     <string name="title_home">Profile</string>
-    <string name="title_dashboard">Listings</string>
+    <string name="title_dashboard">Home</string>
     <string name="title_notifications">Add Card</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
