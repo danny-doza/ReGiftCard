@@ -7,6 +7,17 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.ProfileFragment">
 
+    <Button
+        android:id="@+id/btn_log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Log Out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_email" />
+
+
     <ImageView
         android:id="@+id/profile_picture"
         android:layout_width="130dp"
@@ -20,7 +31,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/user_email"
@@ -36,22 +46,20 @@
         android:id="@+id/card_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="64dp"
         android:text="Your Cards"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_email" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_log_out" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/card_list"
         android:layout_width="match_parent"
         android:layout_height="164dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_prompt" />
 

@@ -1,5 +1,6 @@
 package com.csci4480.regiftcard.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.csci4480.regiftcard.data.GrabCards
 import com.csci4480.regiftcard.databinding.FragmentProfileBinding
+import com.csci4480.regiftcard.ui.auth.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
@@ -36,6 +38,11 @@ class ProfileFragment : Fragment() {
         card_grabber.grabCards(binding.cardList, requireActivity())
 
         setupFirebaseAuth(binding)
+
+        binding.btnLogOut.setOnClickListener {
+            mAuth.signOut()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+        }
 
         return view
     }
