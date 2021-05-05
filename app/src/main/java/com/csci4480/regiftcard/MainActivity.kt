@@ -1,14 +1,11 @@
 package com.csci4480.regiftcard
 
-import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -16,9 +13,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.csci4480.regiftcard.ui.LoginActivity
-import com.csci4480.regiftcard.ui.ProfileActivity
-import com.csci4480.regiftcard.utils.FirebaseMethods
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
@@ -29,8 +23,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var sensorManager: SensorManager
     private lateinit var light : Sensor
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,27 +42,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         navView.setupWithNavController(navController)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.top_bar, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d(LOG_TAG, "onOptionsItemSelected() called")
-        return when(item.itemId) {
-            R.id.profile_page -> {
-                startActivity(Intent(this, ProfileActivity::class.java))
-                true
-            }
-            R.id.log_out -> {
-                mAuth.signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 

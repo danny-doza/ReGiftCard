@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.csci4480.regiftcard.ui.dashboard.DashboardFragment"
+        android:name="com.csci4480.regiftcard.ui.HomeFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/profile_page"
-        android:name="com.csci4480.regiftcard.ui.home.HomeFragment"
+        android:name="com.csci4480.regiftcard.ui.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/activity_profile" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReGiftCard">
         <activity
-            android:name=".ui.SignUpActivity"
+            android:name=".ui.auth.SignUpActivity"
             android:label="@string/title_activity_signup" />
-        <activity android:name=".ui.ResetPasswordActivity"
+        <activity android:name=".ui.auth.ResetPasswordActivity"
             android:label="@string/title_activity_resetpassword"/>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.auth.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +28,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
-        <activity
-            android:name=".ui.ProfileActivity"
-            android:label="ProfileActivity" />
     </application>
 
 </manifest>

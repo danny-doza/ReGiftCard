@@ -1,4 +1,4 @@
-package com.csci4480.regiftcard.ui
+package com.csci4480.regiftcard.ui.auth
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.csci4480.regiftcard.databinding.ActivityResetPasswordBinding
 import com.csci4480.regiftcard.utils.FirebaseMethods
-import com.google.firebase.auth.FirebaseAuth
 
 class ResetPasswordActivity : AppCompatActivity() {
     private lateinit var firebaseMethods : FirebaseMethods
