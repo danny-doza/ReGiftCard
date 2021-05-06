@@ -40,6 +40,7 @@ class SignUpActivity: AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setTitle("Sign Up");
 
         // init. firebaseMethods
         firebaseMethods = FirebaseMethods(this, applicationContext)
