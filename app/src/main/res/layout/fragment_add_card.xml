@@ -23,13 +23,13 @@
         android:id="@+id/text_upload_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="cursive"
         android:text="Upload a Card"
         android:textAlignment="center"
         android:textSize="48sp"
-        android:fontFamily="cursive"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_number"

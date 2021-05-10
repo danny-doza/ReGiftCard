@@ -67,6 +67,14 @@ class AddCardFragment: Fragment() {
 
         binding.buttonUploadCard.setOnClickListener {
             getCardInfo(binding)
+            Toast.makeText(context, "Your card has been added!", Toast.LENGTH_SHORT).show()
+            binding.inputCompany.getText()?.clear()
+            binding.inputCardWorth.getText()?.clear()
+            binding.inputNumber.getText()?.clear()
+            binding.autoCompleteTextView2.getText()?.clear()
+            binding.autoCompleteTextView1.getText()?.clear()
+            binding.autoCompleteTextView3.getText()?.clear()
+            binding.autoCompleteTextView4.getText()?.clear()
         }
 
         return view

@@ -52,10 +52,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (event != null) {
             if( event.sensor.getType() == Sensor.TYPE_LIGHT) {
                 Log.d(LOG_TAG, "got Light sensor data of ${event.values[0]}")
-                var light = event.values[0];
-                if (light < 25000)
+                var light = event.values[0]
+                if (light < 20)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                if (light > 25000)
+                if (light > 20)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
