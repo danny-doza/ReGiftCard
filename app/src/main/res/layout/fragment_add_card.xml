@@ -99,7 +99,7 @@
         android:layout_width="83dp"
         android:layout_height="21dp"
         android:layout_marginTop="20dp"
-        android:text="Ammount: $"
+        android:text="Amount: $"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.csci4480.regiftcard.data.classes.Card
+import com.csci4480.regiftcard.data.classes.Trade
 import com.csci4480.regiftcard.databinding.FragmentAddCardBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
@@ -157,7 +158,7 @@ class AddCardFragment: Fragment() {
             return
         }
         var card_id = UUID.randomUUID()
-        val card = Card(card_id.toString(), company, card_num, card_worth.toInt(), companies_accepted)
+        val card = Card(card_id.toString(), user_id, company, card_num, card_worth.toInt(), companies_accepted)
 
         val current_user_query: Query = mDatabase.child("users")
         current_user_query.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -172,25 +173,41 @@ class AddCardFragment: Fragment() {
             override fun onCancelled(error: DatabaseError) {}
         })
 
+
+
         val all_cards_query: Query = mDatabase.child("cards")
-        all_cards_query.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
+        all_cards_query.addChildEventListener(object : ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.d(LOG_TAG, "Checking for card matches.")
                 snapshot.children.forEach {
                     val curr_card = snapshot.getValue(Card::class.java)
+                    val curr_companies_accepted = snapshot.child("companies_accepted").value
+                    Log.d(LOG_TAG, "New card company name: ${card.company_name}, Curr. card company name: ${curr_companies_accepted}")
                     // if a card exists in database that matches card being inputted
-                    if ((card.company_name in curr_card!!.companies_accepted) and (card.card_worth == curr_card!!.card_worth)) {
+                    if ((card.company_name in curr_card!!.companies_accepted) and (card.card_worth == curr_card!!.card_worth) and (curr_card!!.company_name in card.companies_accepted)) {
                         Log.d(LOG_TAG, "Match found. Initiating trade.")
                         Toast.makeText(requireContext(), "Match found! Initiating trade now.", Toast.LENGTH_LONG).show()
+                        val trade_id = UUID.randomUUID()
+                        val trade = Trade(trade_id.toString(), user_id, curr_card.user_id, card.card_id, curr_card.card_id)
+                        mDatabase.child("viable_trades").child(trade_id.toString()).setValue(trade)
+                        return
                     }
 
                     // if this card matches a card in database
-                    if ((curr_card!!.company_name in card.companies_accepted) and (curr_card!!.card_worth == card.card_worth)) {
+                    if ((curr_card!!.company_name in card.companies_accepted) and (curr_card!!.card_worth == card.card_worth) and (curr_card!!.company_name in card.companies_accepted)) {
                         Log.d(LOG_TAG, "Match found. Initiating trade.")
                         Toast.makeText(requireContext(), "Match found! Initiating trade now.", Toast.LENGTH_LONG).show()
+                        val trade_id = UUID.randomUUID()
+                        val trade = Trade(trade_id.toString(), user_id, curr_card.user_id, card.card_id, curr_card.card_id)
+                        mDatabase.child("viable_trades").child(trade_id.toString()).setValue(trade)
+                        return
                     }
                 }
             }
 
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
             override fun onCancelled(error: DatabaseError) {}
         })
     }

@@ -30,14 +30,14 @@ class GrabCards() {
 
     private lateinit var cards_adapter: FirebaseRecyclerAdapter<Card, GrabCards.CardTextViewHolder>
 
-    public fun grabCards(recycler_view: RecyclerView, activity: FragmentActivity) {
+    public fun grabCards(recycler_view: RecyclerView, activity: FragmentActivity, user_id: String) {
         Log.d(LOG_TAG, "grabCards: Attempting to grab cards.")
         recycler_view.hasFixedSize()
         recycler_view.layoutManager = LinearLayoutManager(activity)
 
         val cardsRef = FirebaseDatabase.getInstance().getReference().child("cards")
-        val cardsQuery = cardsRef.orderByChild("company_name")
-
+        val cardsQuery = cardsRef
+        Log.d(LOG_TAG, "$cardsQuery")
         val cardsOptions = FirebaseRecyclerOptions.Builder<Card>().setQuery(cardsQuery, Card::class.java).build()
 
         cards_adapter = object: FirebaseRecyclerAdapter<Card, GrabCards.CardTextViewHolder>(cardsOptions) {

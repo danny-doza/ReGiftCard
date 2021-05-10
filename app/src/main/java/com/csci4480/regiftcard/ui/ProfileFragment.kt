@@ -25,6 +25,8 @@ class ProfileFragment : Fragment() {
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
 
+    private var user_id: String = ""
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -34,10 +36,8 @@ class ProfileFragment : Fragment() {
         var binding = FragmentProfileBinding.inflate(layoutInflater)
         var view = binding.root
 
-        card_grabber = GrabCards()
-        card_grabber.grabCards(binding.cardList, requireActivity())
-
         setupFirebaseAuth(binding)
+        card_grabber = GrabCards()
 
         binding.btnLogOut.setOnClickListener {
             mAuth.signOut()
@@ -49,7 +49,6 @@ class ProfileFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        card_grabber.onStart()
         mAuth.addAuthStateListener(mAuthListener)
     }
 
@@ -66,7 +65,10 @@ class ProfileFragment : Fragment() {
 
             //if user is signed in
             if (user != null) {
+                user_id = user.uid
                 binding.userEmail.text = user.email
+                card_grabber.grabCards(binding.cardList, requireActivity(), user_id)
+                card_grabber.onStart()
             } else {
                 Log.d(LOG_TAG, "onAuthStateChanged: Signed out.")
             }
